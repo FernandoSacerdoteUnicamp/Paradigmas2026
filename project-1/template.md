@@ -37,17 +37,17 @@ ASSETS:
   PERSONAGEM Joao (Source: "assets/characters/joao/", Formato: ".png")
   PERSONAGEM Maria (Source: "assets/characters/maria/", Formato: ".png")
   
-  CENARIO Quarto (Source: "assets/backgrounds/quarto_noite.jpg")
+  CENARIO FLORESTA (Source: "assets/backgrounds/floresta.jpg")
 ```
 Construção da história:
 ```
 CENA "O Despertar do Poder" (Local: "Floresta Proibida"):
 
   QUADRO 1 (Layout: Topo_Largo, Proporcao: 16/9):
-    CENARIO: Floresta (Tempo: Crepusculo, Filtro: "Neblina")
+    CENARIO: Floresta (Tempo: Claro)
     
     # O interpretador busca em: assets/characters/joao/serio.png
-    ENTRA: Joao (Posicao: Esquerda, Sentimento: "Serio", Pose: "Guarda_Alta")
+    ENTRA: Joao (Posicao: Esquerda, Sentimento: "Em guarda")
     Joao pensa: "Eu sinto uma presença... ela está perto."
     
     EFEITO: "CRACK!" (Origem: "Arvores", Estilo: "Quebra")
