@@ -247,13 +247,12 @@ WS
 
 Exemplo 1: Aqui adicionatemos 2 quadros numa folha e uma imagem ao primeiro quadro.
 ```
-var a, b, c, d = 0, 0, 10, 10
-Define quadro a b c d
-Define folha 50 100 
-Define quadro q1 a b c d
-Define quadro q2 c-a d-b 20 20
-Define imagem x caminho_arquivo
-Inserir imagem x in Quadro q1
+CENA "Chegada" (Local: "Cidade"):
+QUADRO 1 (Layout: "Topo_"):
+CENARIO: "Rua movimentada"
+Joao (Posicao: "Esquerda", Sentimento: "Neutro")
+Joao diz: "Finalmente cheguei."
+EFEITO: "Trovoada"
 ```
 A evoulução de linha a linha está descrita no [PDF da apresentação.](https://docs.google.com/presentation/d/1vxBakMYeWVePtD7YE5kNZg7C7IWeQy7AnbGvJanInRA/edit?usp=sharing)
 
