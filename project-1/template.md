@@ -31,20 +31,20 @@ CENA "nome da cena" (Local: "nome_do_local"):
   # OBRIGATORIO: QUADRO com parametro "Layout" 
   QUADRO numero (Layout: "nome_do_layout"):
 
-  # OBRIGATORIO: CENARIO
-  CENARIO: "nome_do_cenario"
-
-  # OPCIONAL: RECORDATORIO
-  RECORDATORIO: "texto do recordatorio."
-
-  #  OPCIONAL: linha com nome do personagem especificando sua "Posicao" e "Sentimento"
-  NOME_DO_PERSONAGEM (Posicao: "posição", Sentimento: "sentimento")
-
-  #  OPCIONAL: linha com nome de personagem especificando sua "açao". Ação pode ser "diz", "grita", "pensa" ou "sussurra" sem aspas.
-  NOME_DO_PERSONAGEM acao: "dialogo"
-    
-  # OPCIONAL: Efeito
-  EFEITO: "nome do efeito"
+    # OBRIGATORIO: CENARIO
+    CENARIO: "nome_do_cenario"
+  
+    # OPCIONAL: RECORDATORIO
+    RECORDATORIO: "texto do recordatorio."
+  
+    #  OPCIONAL: linha com nome do personagem especificando sua "Posicao" e "Sentimento"
+    NOME_DO_PERSONAGEM (Posicao: "posição", Sentimento: "sentimento")
+  
+    #  OPCIONAL: linha com nome de personagem especificando sua "açao". Ação pode ser "diz", "grita", "pensa" ou "sussurra" sem aspas.
+    NOME_DO_PERSONAGEM acao: "dialogo"
+      
+    # OPCIONAL: Efeito
+    EFEITO: "nome do efeito"
 
 # palavras-chave da linguagem: CENA, Local, QUADRO, Layout, CENARIO, RECORDATORIO, Posicao, Sentimento, diz, grita, pensa, sussurra e EFEITO
 
