@@ -25,49 +25,35 @@ O projeto idealiza uma linguagem minimalista e legível para humanos voltada à 
 
 Configuração da página: 
 ```
-CONFIG:
-  PAGINA: A4 (Orientacao: Vertical)
-  ESTILO: Anime (Cor: FullColor)
-  FONTE: "ComicSans-Bold"
-```
-Declaração dos personagens:
-```
+# OBRIGATORIO: CENA com parametro "Local"
+CENA "nome da cena" (Local: "nome_do_local"):
+
+  # OBRIGATORIO: QUADRO com parametro "Layout" 
+  QUADRO numero (Layout: "nome_do_layout"):
+
+  # OBRIGATORIO: CENARIO
+  CENARIO: "nome_do_cenario"
+
+  # OPCIONAL: RECORDATORIO
+  RECORDATORIO: "texto do recordatorio."
+
+  #  OPCIONAL: linha com nome do personagem especificando sua "Posicao" e "Sentimento"
+  NOME_DO_PERSONAGEM (Posicao: "posição", Sentimento: "sentimento")
+
+  #  OPCIONAL: linha com nome de personagem especificando sua "açao". Ação pode ser "diz", "grita", "pensa" ou "sussurra" sem aspas.
+  NOME_DO_PERSONAGEM acao: "dialogo"
+    
+  # OPCIONAL: Efeito
+  EFEITO: "nome do efeito"
+
+# palavras-chave da linguagem: CENA, Local, QUADRO, Layout, CENARIO, RECORDATORIO, Posicao, Sentimento, diz, grita, pensa, sussurra e EFEITO
+
 ASSETS:
   # O source aponta para a pasta; o interpretador buscará o PNG lá dentro
   PERSONAGEM Joao (Source: "assets/characters/joao/", Formato: ".png")
   PERSONAGEM Maria (Source: "assets/characters/maria/", Formato: ".png")
-  
-  CENARIO FLORESTA (Source: "assets/backgrounds/floresta.jpg")
-```
-Construção da história:
-```
-CENA "O Despertar do Poder" (Local: "Floresta Proibida"):
+  CENARIO Quarto (Source: "assets/backgrounds/quarto_noite.jpg")
 
-  QUADRO 1 (Layout: Topo_Largo, Proporcao: 16/9):
-    CENARIO: Floresta (Tempo: Claro)
-    
-    # O interpretador busca em: assets/characters/joao/serio.png
-    ENTRA: Joao (Posicao: Esquerda, Sentimento: "Em guarda")
-    Joao pensa: "Eu sinto uma presença... ela está perto."
-    
-    EFEITO: "CRACK!" (Origem: "Arvores", Estilo: "Quebra")
-
-  QUADRO 2 (Layout: Centro_Esquerda, Tamanho: 1/2):
-    ENTRA: Maria (Posicao: Direita, Sentimento: "Furtiva")
-    
-    RECORDATORIO: "Das sombras, uma aliada inesperada surge."
-    
-    Maria diz: "Você demora muito para perceber o óbvio, João." (Tipo: Sussurro)
-    MUDAR_ESTADO: Joao (Sentimento: "Surpreso")
-
-  QUADRO 3 (Layout: Centro_Direita, Tamanho: 1/2):
-    EFEITO: "BOOM!" (Tipo: Explosao, Intensidade: Máxima)
-    
-    MUDAR_ESTADO: Maria (Sentimento: "Pronta_Para_Combate")
-    Maria grita: "AGORA!" 
-
-    # Foco narrativo no narrador
-    RECORDATORIO: "A batalha pela nota final havia começado."
 ```  
 
 ## Gramática da Linguagem
@@ -245,14 +231,19 @@ WS
 
 ## Exemplos Selecionados
 
-Exemplo 1: Aqui adicionatemos 2 quadros numa folha e uma imagem ao primeiro quadro.
+Exemplo 1:
 ```
-CENA "Chegada" (Local: "Cidade"):
-QUADRO 1 (Layout: "Topo_"):
-CENARIO: "Rua movimentada"
-Joao (Posicao: "Esquerda", Sentimento: "Neutro")
-Joao diz: "Finalmente cheguei."
-EFEITO: "Trovoada"
+CENA "O Despertar do Poder" (Local: "Floresta Proibida"):
+
+  QUADRO 1 (Layout: "Topo_Largo"):
+    CENARIO: "Floresta"
+    
+    # O interpretador busca em: assets/characters/joao/em_guarda.png
+    Joao (Posicao: "Esquerda", Sentimento: "Em guarda")
+    
+    Joao pensa: "Eu sinto uma presença... ela está perto."
+    EFEITO: "CRACK!"
+    RECORDATORIO: "O silêncio da floresta é interrompido."
 ```
 A evoulução de linha a linha está descrita no [PDF da apresentação.](https://docs.google.com/presentation/d/1vxBakMYeWVePtD7YE5kNZg7C7IWeQy7AnbGvJanInRA/edit?usp=sharing)
 
