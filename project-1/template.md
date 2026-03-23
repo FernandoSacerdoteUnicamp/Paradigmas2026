@@ -73,32 +73,174 @@ CENA "O Despertar do Poder" (Local: "Floresta Proibida"):
 ## Gramática da Linguagem
 
 ```
-S -> DefinirFolha | DefinirQuadro | DefinirImagem | Variavel | #.
+S → ROTEIRO
 
-DefinirFolha -> Define Folha Exp Exp.
+ROTEIRO → CENA ROTEIRO
+ROTEIRO → CENA
 
-DefinirQuadro -> Define Quadro palavra Exp Exp Exp Exp.
+CENA → "CENA" STRING PARAMS_CENA ":" QUADROS
 
-DefinirImagem -> Define Imagem palavra palavra.
+PARAMS_CENA → "(" "Local" ":" STRING ")"
 
+QUADROS → QUADRO QUADROS
+QUADROS → QUADRO
 
-Variavel -> Var Atr.
+QUADRO → "QUADRO" NUMERO PARAMS_QUADRO ":" CENARIO ELEMENTOS
 
-Atr -> palavra = Exp | palavra , Atr , Exp.
+PARAMS_QUADRO → "(" "Layout" ":" STRING ")"
 
-Exp -> numero | Exp Operador Exp | palavra.
+CENARIO → "CENARIO" ":" STRING
 
-Operador -> + | - | * | :.
-Define -> define.
+ELEMENTOS → ELEMENTO ELEMENTOS
+ELEMENTOS → ε   // 0 ou mais elementos
 
-Var -> var.
+ELEMENTO → RECORDATORIO
+ELEMENTO → ENTRADA
+ELEMENTO → FALA
+ELEMENTO → EFEITO
 
-Quadro -> quadro.
+RECORDATORIO → "RECORDATORIO" ":" STRING
 
-Imagem -> imagem.
+ENTRADA → IDENT PARAMS_ENTRADA
 
-Folha -> folha.
+PARAMS_ENTRADA → "(" PARAM_LISTA ")"
+
+PARAM_LISTA → PARAM_ENTRADA "," PARAM_LISTA
+PARAM_LISTA → PARAM_ENTRADA
+
+PARAM_ENTRADA → "Posicao" ":" STRING
+PARAM_ENTRADA → "Sentimento" ":" STRING
+
+FALA → IDENT ACAO ":" STRING
+
+ACAO → "diz"
+ACAO → "grita"
+ACAO → "pensa"
+ACAO → "sussurra"
+
+EFEITO → "EFEITO" ":" STRING
 ```
+
+### Parser equivalente
+```
+grammar QuadrinhosDSL;
+
+// =====================
+// PARSER
+// =====================
+
+roteiro
+    : cena+ EOF
+    ;
+
+cena
+    : 'CENA' STRING parametrosCena ':' NEWLINE quadro+
+    ;
+
+quadro
+    : 'QUADRO' NUMBER parametrosQuadro ':' NEWLINE
+      cenario
+      elementos
+    ;
+
+// obrigatório
+cenario
+    : 'CENARIO' ':' STRING NEWLINE
+    ;
+
+// 0 ou mais elementos
+elementos
+    : elemento*
+    ;
+
+elemento
+    : recordatorio
+    | entrada
+    | fala
+    | efeito
+    ;
+
+// =====================
+// ELEMENTOS
+// =====================
+
+recordatorio
+    : 'RECORDATORIO' ':' STRING NEWLINE
+    ;
+
+entrada
+    : IDENTIFIER parametrosEntrada NEWLINE
+    ;
+
+fala
+    : IDENTIFIER acao ':' STRING NEWLINE
+    ;
+
+efeito
+    : 'EFEITO' ':' STRING NEWLINE
+    ;
+
+// =====================
+// AÇÕES
+// =====================
+
+acao
+    : 'diz'
+    | 'grita'
+    | 'pensa'
+    | 'sussurra'
+    ;
+
+// =====================
+// PARÂMETROS (FORÇADOS)
+// =====================
+
+parametrosCena
+    : '(' 'Local' ':' STRING ')'
+    ;
+
+parametrosQuadro
+    : '(' 'Layout' ':' STRING ')'
+    ;
+
+parametrosEntrada
+    : '(' parametroEntrada (',' parametroEntrada)* ')'
+    ;
+
+parametroEntrada
+    : 'Posicao' ':' STRING
+    | 'Sentimento' ':' STRING
+    ;
+
+// =====================
+// LEXER
+// =====================
+
+STRING
+    : '"' (~["\\] | '\\' .)* '"'
+    ;
+
+NUMBER
+    : [0-9]+
+    ;
+
+IDENTIFIER
+    : [a-zA-Z_][a-zA-Z0-9_]*
+    ;
+
+COMMENT
+    : '#' ~[\r\n]* -> skip
+    ;
+
+NEWLINE
+    : '\r'? '\n'
+    ;
+
+WS
+    : [ \t]+ -> skip
+    ;
+```
+
 
 
 ## Exemplos Selecionados
