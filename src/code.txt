@@ -1,0 +1,22 @@
+CENA "O Despertar do Poder" (Local: "Floresta Proibida"):
+
+QUADRO 1 (Layout: "Topo_Largo"):
+CENARIO: "Floresta"
+
+# O interpretador busca em: assets/characters/joao/em_guarda.png
+Joao (Posicao: "Direita", Sentimento: "Em guarda")
+
+Joao pensa: "Eu sinto uma presença... ela está perto."
+EFEITO: "CRACK!"
+RECORDATORIO: "O silêncio da floresta é interrompido."
+
+CENA "" (Local: "Floresta Proibida"):
+
+QUADRO 1 (Layout: "Topo_Largo"):
+CENARIO: "Floresta"
+
+# O interpretador busca em: assets/characters/joao/em_guarda.png
+Joao (Posicao: "Esquerda", Sentimento: "Em guarda")
+
+Joao pensa: "Eita, tem alguem aqui"
+RECORDATORIO: "O silêncio da floresta é interrompido."

@@ -1,0 +1,95 @@
+
+  <html>
+  <head>
+    <style>
+      body { font-family: Arial; background: #111; color: #fff; }
+      .scene { margin-bottom: 40px; }
+      .panel {
+        width: 500px;
+        height: 500px;
+
+        position: relative; /* ESSENCIAL */
+        overflow: hidden;
+
+        border: 2px solid #fff;
+        margin: 10px;
+        }
+      .background {
+        position: absolute;
+        inset: 0;
+
+        background-size: cover;
+        background-position: center;
+
+        z-index: 0;
+        }
+      .character {
+        position: absolute;
+        z-index: 1;
+        }
+
+        .character img {
+        width: 120px;
+        }
+      .effect {
+        position: absolute;
+        z-index: 2;
+        top: 100px;
+        right: 100px;
+        }
+
+        .effect img {
+        width: 100px;
+        }
+        .speech {
+        position: absolute;
+        z-index: 3;
+
+        top: 20px;
+        right: 20px;
+
+        background: white;
+        color: black;
+        padding: 10px;
+        border-radius: 20px;
+        max-width: 200px;
+        }
+        .speech::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 20px;
+
+        border-width: 10px;
+        border-style: solid;
+        border-color: white transparent transparent transparent;
+        }
+      .caption {
+        background: #000;
+        padding: 5px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+  <div class="scene"><h2>O Despertar do Poder - Floresta Proibida</h2><div class="panel"><div class="background" style="background-image: url('assets/backgrounds/floresta.png')"></div>
+                        <div class="character" style="right: 20px; bottom: 20px;">
+                            <img src="assets/characters/joao/em_guarda.png" />
+                        </div>
+                        
+            <div class="speech">
+              <b>Joao (pensa)</b>: Eu sinto uma presença... ela está perto.
+            </div>
+          
+            <div class="effect">
+              <img src="assets/effects/crack.png" />
+            </div>
+          <div class="caption">O silêncio da floresta é interrompido.</div></div><div class="panel"><div class="background" style="background-image: url('assets/backgrounds/floresta.png')"></div>
+                        <div class="character" style="left: 20px; bottom: 20px;">
+                            <img src="assets/characters/joao/em_guarda.png" />
+                        </div>
+                        
+            <div class="speech">
+              <b>Joao (pensa)</b>: Eita, tem alguem aqui
+            </div>
+          <div class="caption">O silêncio da floresta é interrompido.</div></div></div></body></html>
