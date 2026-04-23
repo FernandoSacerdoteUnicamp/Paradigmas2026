@@ -19,6 +19,8 @@ nterativa.
 
 > [link para o PDF da apresentação.](https://docs.google.com/presentation/d/1vxBakMYeWVePtD7YE5kNZg7C7IWeQy7AnbGvJanInRA/edit?usp=sharing)
 
+> [Link para Slides Segunda Etapa.](https://docs.google.com/presentation/d/1zfl2GK9UY8qGVcUfvIgOUBY7GwwbGwdAbAwbD9l2eHE/edit?slide=id.g3d8c0a168d2_0_99#slide=id.g3d8c0a168d2_0_99)
+
 ## Sintaxe da Linguagem na Forma de Tutorial
 
 O projeto idealiza uma linguagem minimalista e legível para humanos voltada à criação de quadrinhos. Através de uma estrutura organizada em blocos de configuração, definição de assets e fluxo de cenas, a linguagem permite traduzir roteiros literários diretamente em estruturas de dados visuais, suportando estados emocionais, tipos de balões e efeitos sonoros nativamente.
