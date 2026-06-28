@@ -172,6 +172,106 @@ A implementação é feita em **Guile Scheme** no notebook `src/interpretador_sc
    - Painel com `position: relative; overflow: hidden`
    - Elementos posicionados com `z-index` para sobreposição
 
+### 6. Macros e Simplificação de Código
+
+**O que são Macros?**
+
+Macros em Scheme são transformações de código em tempo de compilação usando `define-syntax` e `syntax-rules`. Elas permitem **reduzir repetição** e criar abstrações sintáticas personalizadas.
+
+**Por que usar macros?**
+
+- Redução de repetição de código: cenas que exigem 7 linhas ficam com 1
+- Garantia estrutural: a macro força a estrutura correta, evitando erros
+- Legibilidade aumentada: código declarativo em vez de aninhado
+- Reutilização: padrões comuns encapsulados em uma única expressão
+
+**Comparação: Sem Macro vs Com Macro**
+
+Sem macro (7 linhas, verboso):
+```scheme
+(cena "O Despertar" "Floresta"
+  (quadro 1 "Normal"
+    (cenario "floresta")
+    (personagem "João" "esquerda" "medo")
+    (fala "João" "diz" "Algo está acontecendo...")
+    (efeito "CRACK")
+    (recordatorio "A floresta despertou.")))
+```
+
+Com macro (1 linha, conciso):
+```scheme
+(cena-dramatica "O Despertar" "Floresta" "floresta"
+  "João" "esquerda" "medo" "diz"
+  "Algo está acontecendo..."
+  "CRACK"
+  "A floresta despertou.")
+```
+
+**Macros Implementadas**
+
+| Macro | Propósito | Redução |
+|-------|-----------|---------|
+| `cena-simples` | Cena com 1 personagem + 1 fala | 7 → 1 linha |
+| `cena-dialogo` | 2 personagens em diálogo | 8 → 1 linha |
+| `cena-dramatica` | 1 personagem + efeito + narração | 9 → 1 linha |
+| `cena-dialogo-completa` | 2 personagens + diálogo + narração | 9 → 1 linha |
+
+**Exemplo 1: `cena-dramatica`**
+
+Define uma cena dramática com personagem, ação, efeito e narração em uma única chamada:
+
+```scheme
+(define-syntax cena-dramatica
+  (syntax-rules ()
+    ((cena-dramatica nome local cenario personagem posicao emocao acao fala nome-efeito naracao)
+     (cena nome local
+       (quadro 1 "Normal"
+         (cenario cenario)
+         (personagem personagem posicao emocao)
+         (fala personagem acao fala)
+         (efeito nome-efeito)
+         (recordatorio naracao))))))
+```
+
+Uso:
+```scheme
+(define exemplo1-macro
+  (cena-dramatica "O Despertar do Poder" "Floresta Proibida"
+                  "floresta"
+                  "Joao" "esquerda" "em_guarda"
+                  "pensa"
+                  "Eu sinto uma presença... ela está perto."
+                  "CRACK"
+                  "O silêncio da floresta é interrompido."))
+```
+
+**Exemplo 2: `cena-dialogo-completa`**
+
+Combina dois personagens, seus diálogos e uma narração em uma expressão:
+
+```scheme
+(define-syntax cena-dialogo-completa
+  (syntax-rules ()
+    ((cena-dialogo-completa nome local cenario (p1 pos1 em1 fala1) (p2 pos2 em2 fala2) naracao)
+     (cena nome local
+       (quadro 1 "Normal"
+         (cenario cenario)
+         (personagem p1 pos1 em1)
+         (personagem p2 pos2 em2)
+         (fala p1 "diz" fala1)
+         (fala p2 "diz" fala2)
+         (recordatorio naracao))))))
+```
+
+Uso:
+```scheme
+(define exemplo2-macro
+  (cena-dialogo-completa "Reencontro" "Cafeteria da Cidade" "cafeteria"
+    ("Joao" "esquerda" "em_guarda" "Quanto tempo, Maria!")
+    ("Maria" "direita" "feliz" "Que coincidência te encontrar por aqui!")
+    "Um reencontro inesperado na cafeteria."))
+```
+
 ---
 
 ## 6. Exemplos Selecionados
