@@ -1,95 +1,104 @@
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>DSL de Quadrinhos - Exemplos</title>
+<style>
 
-  <html>
-  <head>
-    <style>
-      body { font-family: Arial; background: #111; color: #fff; }
-      .scene { margin-bottom: 40px; }
-      .panel {
-        width: 500px;
-        height: 500px;
+  body { font-family: Arial; background: #111; color: #fff; padding: 20px; }
+  .scene { margin-bottom: 40px; }
+  .panel {
+    width: 500px; height: 500px;
+    position: relative; overflow: hidden;
+    border: 2px solid #fff; margin: 10px;
+    background: #333;
+  }
+  .background {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    z-index: 0;
+  }
+  .character { position: absolute; z-index: 5; }
+  .character img { width: 200px; }
+  .effect { position: absolute; z-index: 4; bottom: 20px; right: 20px; }
+  .effect img { width: 100px; }
+  .speech {
+    position: absolute; z-index: 6;
+    background: white; color: black;
+    padding: 10px; border-radius: 20px;
+    max-width: 200px; font-size: 12px;
+    border: 2px solid black;
+  }
 
-        position: relative; /* ESSENCIAL */
-        overflow: hidden;
+  .speech[data-character='Joao'] {
+    top: 80px; left: 20px;
+  }
 
-        border: 2px solid #fff;
-        margin: 10px;
-        }
-      .background {
-        position: absolute;
-        inset: 0;
+  .speech[data-character='Maria'] {
+    top: 80px; right: 10px;
+  }
+  .speech::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+  }
+  /* Balão de pensamento em formato de nuvem */
+  .speech[data-action='pensa'] {
+    border-radius: 40px 40px 40px 40px;
+    border: 2px solid black;
+    background: white;
+    color: black;
+    padding: 15px 20px;
+    position: relative;
+  }
 
-        background-size: cover;
-        background-position: center;
+  /* Círculo maior (bolinha principal) */
+  .speech[data-action='pensa']::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    bottom: -15px;
+    left: 15px;
+  }
 
-        z-index: 0;
-        }
-      .character {
-        position: absolute;
-        z-index: 1;
-        }
+  /* Círculo menor (bolinha menor) */
+  .speech[data-action='pensa']::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    bottom: -28px;
+    left: 8px;
+  }
+  .caption {
+    background: #000;
+    padding: 5px;
+    font-style: italic;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-        .character img {
-        width: 120px;
-        }
-      .effect {
-        position: absolute;
-        z-index: 2;
-        top: 100px;
-        right: 100px;
-        }
-
-        .effect img {
-        width: 100px;
-        }
-        .speech {
-        position: absolute;
-        z-index: 3;
-
-        top: 20px;
-        right: 20px;
-
-        background: white;
-        color: black;
-        padding: 10px;
-        border-radius: 20px;
-        max-width: 200px;
-        }
-        .speech::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 20px;
-
-        border-width: 10px;
-        border-style: solid;
-        border-color: white transparent transparent transparent;
-        }
-      .caption {
-        background: #000;
-        padding: 5px;
-        margin-top: 5px;
-      }
-    </style>
-  </head>
-  <body>
-  <div class="scene"><h2>O Despertar do Poder - Floresta Proibida</h2><div class="panel"><div class="background" style="background-image: url('assets/backgrounds/floresta.png')"></div>
-                        <div class="character" style="right: 20px; bottom: 20px;">
-                            <img src="assets/characters/joao/em_guarda.png" />
-                        </div>
-                        
-            <div class="speech">
-              <b>Joao (pensa)</b>: Eu sinto uma presença... ela está perto.
-            </div>
-          
-            <div class="effect">
-              <img src="assets/effects/crack.png" />
-            </div>
-          <div class="caption">O silêncio da floresta é interrompido.</div></div><div class="panel"><div class="background" style="background-image: url('assets/backgrounds/floresta.png')"></div>
-                        <div class="character" style="left: 20px; bottom: 20px;">
-                            <img src="assets/characters/joao/em_guarda.png" />
-                        </div>
-                        
-            <div class="speech">
-              <b>Joao (pensa)</b>: Eita, tem alguem aqui
-            </div>
-          <div class="caption">O silêncio da floresta é interrompido.</div></div></div></body></html>
+</style>
+</head>
+<body>
+<h1>DSL para Criação de Histórias em Quadrinhos</h1>
+<p>Exemplos gerados com Guile Scheme</p>
+<div class='scene'><h2>O Despertar do Poder - Floresta Proibida</h2><div class='panel'><div class='background' style='background-image:url("assets/backgrounds/floresta.png")'></div><div class='character' style='left:20px; bottom:20px;'><img src='assets/characters/joao/em_guarda.png'/></div><div class='speech' data-action='pensa' data-character='Joao'><b>Joao (pensa)</b>: Eu sinto uma presença... ela está perto.</div><div class='effect'><img src='assets/effects/crack.png'/></div><div class='caption'>O silêncio da floresta é interrompido.</div></div></div>
+<div class='scene'><h2>Reencontro - Cafeteria da Cidade</h2><div class='panel'><div class='background' style='background-image:url("assets/backgrounds/cafeteria.png")'></div><div class='character' style='left:20px; bottom:20px;'><img src='assets/characters/joao/em_guarda.png'/></div><div class='character' style='right:20px; bottom:20px;'><img src='assets/characters/maria/feliz.png'/></div><div class='speech' data-action='diz' data-character='Joao'><b>Joao (diz)</b>: Quanto tempo, Maria!</div><div class='speech' data-action='diz' data-character='Maria'><b>Maria (diz)</b>: Que coincidência te encontrar por aqui!</div><div class='caption'>Um reencontro inesperado na cafeteria.</div></div></div>
+</body>
+</html>
