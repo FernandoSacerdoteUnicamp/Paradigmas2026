@@ -386,9 +386,11 @@ A implementação da DSL demonstrou que a composição funcional é efetiva para
 ## 9. Trabalhos Futuros
 
 1. **Parser de texto completo**
-   - Implementar parser que lê sintaxe descritiva (`code.txt`)
+   - Implementar parser que lê sintaxe descritiva (como em `code.txt`)
    - Converter para AST e depois para funções Scheme
    - Isso fecharia o gap entre design e implementação
+
+   O arquivo `parser_text2schemelike.js` é uma tentativa de protótipo
 
 2. **Suporte a múltiplas cenas/histórias**
    - Sistema de capítulos
